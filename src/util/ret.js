@@ -9,7 +9,7 @@ module.exports = class {
         // }
 
         if (arguments.length < 2) {
-            return { code: 0, msg: 'success', data: arguments[0] };
+            return { code: 0, msg: 'success', data: arguments[0] || null };
         }
 
         return { code, msg, data };

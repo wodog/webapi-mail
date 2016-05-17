@@ -27,12 +27,17 @@ module.exports = function(app, passport) {
   /**
    * 新建用户，
    */
-  router.put('/user/:name', userController.createUser);
+  router.post('/add', userController.createUser);
+
+  /**
+   * 更新用户
+   */
+  router.post('/update', userController.updateUser);
 
   /**
    * 发送邮件
    */
-  router.post('/mail/send', mailController.sendMail);
+  router.post('/send', mailController.sendMail);
 
 
   app.use(router.routes());

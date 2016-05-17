@@ -8,36 +8,30 @@
 git clone https://github.com/wodog/webapi_mail.git
 cd webapi_mail
 npm install
+修改config/config.default.js文件
 node run start
 ```
 
 #### API
 
-###### /user/:name
+###### /add  POST  新建一个认证的用户,得到api_key
 
-地址 | 方法 | 描述
-----  | ------|----
-/user/:name | put | 新建一个认证的用户,得到api_key 
-
-###### 参数
+参数
 
 字段 | 类型 | 描述
 --- | ---- | ----
-name | String | 用户名字
+name | String | 邮箱账号
+pass | String | 邮箱密码
 
-###### 返回
+返回
 
 字段 | 类型 | 描述 
 ---- | --- | ----
 api_key | String | 用户凭证
 
-###### /mail/send
+###### /send  POST  发送邮件 
 
-地址 | 方法 | 描述
-----  | ------|----
-/mail/send | post | 发送邮件 
-
-###### 参数
+参数
 
 字段 | 类型 | 描述
 --- | ---- | ----
@@ -50,9 +44,17 @@ text or html | String | 发送内容
 #### 通用返回格式
 
 ```js
+// 成功
 {
-	code: ,
+	code: 0,
 	msg: 'success',
 	data: ${data}
+}
+
+// 失败
+{
+	code: ${err_code},
+	msg: ${err_msg},
+	data: ${err_data}
 }
 ```
