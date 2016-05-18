@@ -12,6 +12,11 @@ npm install
 node run start
 ```
 
+#### TODO
+
+[] 发送记录
+[] 内容模版
+
 #### API
 
 <br>
@@ -106,12 +111,12 @@ POST  发送邮件
 
 参数
 
-字段 | 类型 | 描述
---- | ---- | ----
-api_key | String | 用户凭证
-to | String | 接受对象
-subject | String | 主题
-html | String | 发送内容
+字段 | 类型 | 必须 | 描述
+--- | ---- | ---- |----
+api_key | String | 是 |  用户凭证
+to | String | 是 | 接受对象
+subject | String | 是 | 主题
+html | String | 是 | 发送内容
 
 <br>
 <br>
@@ -129,7 +134,7 @@ html | String | 发送内容
 // 失败
 {
 	code: -1,
-	msg: 'failure,
+	msg: 'failure',
 	data: ${err_message}
 }
 ```
