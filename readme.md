@@ -14,7 +14,7 @@ node run start
 
 #### API
 
-###### /add  POST  新建一个认证的用户,得到api_key
+##### /add  POST  新建一个认证的用户,得到api_key
 
 参数
 
@@ -34,8 +34,11 @@ pool | Boolean | 否 | 是否开启连接池,默认false
 ---- | --- | ----
 api_key | String | 用户凭证
 
+<br>
+<br>
 
-###### /update  POST  更新用户
+
+##### /update  POST  更新用户
 
 参数
 
@@ -53,7 +56,10 @@ pool | Boolean | 否 | 是否开启连接池
 
 返回更新后的字段
 
-###### /view  POST  查看用户
+<br>
+<br>
+
+##### /view  POST  查看用户
 
 参数
 
@@ -63,6 +69,8 @@ api_key | String | 是 | 用户凭证
 
 返回
 
+字段 | 类型 | 必须 | 描述
+--- | ---- | --- | ---
 user | String | 否 | 邮箱账号
 host | String | 否 | 邮箱服务器地址
 port | Number | 否 | 邮箱服务器端口
@@ -71,7 +79,10 @@ secure | Boolean | 否 | 是否开启SSL
 pool | Boolean | 否 | 是否开启连接池
 
 
-###### /remove POST 删除用户
+<br>
+<br>
+
+##### /remove POST 删除用户
 
 参数
 
@@ -79,8 +90,10 @@ pool | Boolean | 否 | 是否开启连接池
 --- | ---- | --- | ---
 api_key | String | 是 | 用户凭证
 
+<br>
+<br>
 
-###### /send  POST  发送邮件 
+##### /send  POST  发送邮件 
 
 参数
 
@@ -91,6 +104,8 @@ to | String | 接受对象
 subject | String | 主题
 text or html | String | 发送内容
 
+<br>
+<br>
 
 #### 通用返回格式
 
