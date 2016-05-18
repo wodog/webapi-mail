@@ -35,9 +35,21 @@ module.exports = function(app, passport) {
   router.post('/update', userController.updateUser);
 
   /**
+   * 查看用户
+   */
+  router.post('/view', userController.viewUser);
+
+  /**
+   * 删除用户
+   */
+  router.post('/remove', userController.removeUser);
+
+
+  /**
    * 发送邮件
    */
   router.post('/send', mailController.sendMail);
+
 
 
   app.use(router.routes());

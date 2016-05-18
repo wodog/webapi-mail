@@ -17,7 +17,7 @@ const config = require("./config/config");
  */
 mongoose.connect(config.mongo.url);
 mongoose.connection.on("error", function(err) {
-  console.log(err);
+    console.log(err);
 });
 
 /**
@@ -25,9 +25,9 @@ mongoose.connection.on("error", function(err) {
  */
 const modelsPath = config.app.root + "/src/models";
 fs.readdirSync(modelsPath).forEach(function(file) {
-  if (~file.indexOf("js")) {
-    require(modelsPath + "/" + file);
-  }
+    if (~file.indexOf("js")) {
+        require(modelsPath + "/" + file);
+    }
 });
 
 /**
@@ -44,7 +44,7 @@ require("./config/routes")(app, passport);
 
 // Start app
 if (!module.parent) {
-  app.listen(config.app.port);
-  console.log("Server started, listening on port: " + config.app.port);
+    app.listen(config.app.port);
+    console.log("Server started, listening on port: " + config.app.port);
 }
 console.log("Environment: " + config.app.env);

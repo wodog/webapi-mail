@@ -5,6 +5,7 @@ const nodemailer = require('nodemailer');
 const config = require('../../config/config');
 const mongoose = require('mongoose');
 const User = mongoose.model('User');
+const common = require('../util/common');
 
 exports.sendMail = function*() {
 
@@ -14,10 +15,18 @@ exports.sendMail = function*() {
     }
 
 
-    const transporter = nodemailer.createTransport(`smtps://${encodeURI(config.mail_option.user)}:${config.mail_option.pass}@smtp.163.com`);
+    const transporter = nodemailer.createTransport({
+        host: u.host,
+        port: u.port,
+        secure: u.secure,
+        auth: {
+            user: u.user,
+            pass: common.decipher(u.pass)
+        }
+    });
 
     var mailOptions = {
-        from: `${config.mail_option.user}`, // sender address
+        from: `"${u.name}" <${u.user}>`, // sender address
         to: this.request.body.to, // list of receivers
         subject: this.request.body.subject, // Subject line
         text: this.request.body.text, // plaintext body

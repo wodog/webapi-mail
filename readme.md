@@ -18,16 +18,67 @@ node run start
 
 参数
 
-字段 | 类型 | 描述
---- | ---- | ----
-name | String | 邮箱账号
-pass | String | 邮箱密码
+字段 | 类型 | 必须| 描述
+--- | ---- | ----| ----
+user | String | 是 | 邮箱账号
+pass | String | 是 | 邮箱密码
+host | String | 是 | 邮箱服务器地址
+port | Number | 是 | 邮箱服务器端口
+name | String | 否 | 邮箱昵称
+secure | Boolean | 否 | 是否开启SSL,默认true
+pool | Boolean | 否 | 是否开启连接池,默认false
 
 返回
 
 字段 | 类型 | 描述 
 ---- | --- | ----
 api_key | String | 用户凭证
+
+
+###### /update  POST  更新用户
+
+参数
+
+字段 | 类型 | 必须 | 描述
+--- | --- | --- | ---
+api_key | String | 是 | 用户凭证
+user | String | 否 | 邮箱账号
+host | String | 否 | 邮箱服务器地址
+port | Number | 否 | 邮箱服务器端口
+name | String | 否 | 邮箱昵称
+secure | Boolean | 否 | 是否开启SSL
+pool | Boolean | 否 | 是否开启连接池
+
+返回
+
+返回更新后的字段
+
+###### /view  POST  查看用户
+
+参数
+
+字段 | 类型 | 必须 | 描述
+--- | ---- | --- | ---
+api_key | String | 是 | 用户凭证
+
+返回
+
+user | String | 否 | 邮箱账号
+host | String | 否 | 邮箱服务器地址
+port | Number | 否 | 邮箱服务器端口
+name | String | 否 | 邮箱昵称
+secure | Boolean | 否 | 是否开启SSL
+pool | Boolean | 否 | 是否开启连接池
+
+
+###### /remove POST 删除用户
+
+参数
+
+字段 | 类型 | 必须 | 描述
+--- | ---- | --- | ---
+api_key | String | 是 | 用户凭证
+
 
 ###### /send  POST  发送邮件 
 
