@@ -62,7 +62,6 @@ pool | Boolean | 否 | 是否开启连接池
 返回更新后的字段
 
 <br>
-<br>
 
 ##### /view  
 POST  查看用户
@@ -75,14 +74,16 @@ api_key | String | 是 | 用户凭证
 
 返回
 
-字段 | 类型 | 必须 | 描述
---- | ---- | --- | ---
-user | String | 否 | 邮箱账号
-host | String | 否 | 邮箱服务器地址
-port | Number | 否 | 邮箱服务器端口
-name | String | 否 | 邮箱昵称
-secure | Boolean | 否 | 是否开启SSL
-pool | Boolean | 否 | 是否开启连接池
+字段 | 类型 | 描述
+--- | ---- | ---
+user | String | 邮箱账号
+host | String | 邮箱服务器地址
+port | Number | 邮箱服务器端口
+name | String | 邮箱昵称
+secure | Boolean | 是否开启SSL
+pool | Boolean | 是否开启连接池
+create_at | Date | 创建时间
+update_at | Date | 更新时间
 
 
 <br>
@@ -110,7 +111,7 @@ POST  发送邮件
 api_key | String | 用户凭证
 to | String | 接受对象
 subject | String | 主题
-text or html | String | 发送内容
+html | String | 发送内容
 
 <br>
 <br>
@@ -127,8 +128,8 @@ text or html | String | 发送内容
 
 // 失败
 {
-	code: ${err_code},
-	msg: ${err_msg},
-	data: ${err_data}
+	code: -1,
+	msg: 'failure,
+	data: ${err_message}
 }
 ```

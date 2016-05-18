@@ -39,6 +39,7 @@ exports.updateUser = function*() {
         const pass = this.request.body.pass;
         const host = this.request.body.host;
         const port = this.request.body.port;
+        const name = this.request.body.name;
         const secure = this.request.body.secure;
         const pool = this.request.body.pool;
 
@@ -62,6 +63,9 @@ exports.updateUser = function*() {
         if (port) {
             u.port = port;
         }
+        if (name) {
+            u.name = name;
+        }
         if (secure) {
             u.secure = secure;
         }
@@ -75,6 +79,7 @@ exports.updateUser = function*() {
             user: u_new.user,
             host: u_new.host,
             port: u_new.port,
+            name: u_new.name,
             secure: u_new.secure,
             pool: u_new.pool
         });
@@ -102,7 +107,9 @@ exports.viewUser = function*() {
             host: u.host,
             port: u.port,
             secure: u.secure,
-            pool: u.pool
+            pool: u.pool,
+            create_at: u.create_at,
+            update_at: u.update_at
         });
     } catch (e) {
         this.body = new ret(-1, 'failure', e.message);
@@ -115,15 +122,15 @@ exports.viewUser = function*() {
  */
 exports.removeUser = function*() {
     try {
-    	const api_key = this.request.body.api_key;
-    	
-    	validate.validate_param(api_key);
+        const api_key = this.request.body.api_key;
 
-    	const re = yield User.removeByAPIKEY(api_key);
+        validate.validate_param(api_key);
 
-    	validate.validate_user_remove(re);
+        const re = yield User.removeByAPIKEY(api_key);
 
-    	this.body = new ret('删除成功');
+        validate.validate_user_remove(re);
+
+        this.body = new ret('删除成功');
     } catch (e) {
         this.body = new ret(-1, 'failure', e.message);
     }
