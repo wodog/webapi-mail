@@ -8,13 +8,17 @@
 git clone https://github.com/wodog/webapi_mail.git
 cd webapi_mail
 npm install
-修改config/config.default.js文件
+修改config/default.config.js文件
 node run start
 ```
 
 #### API
 
-##### /add  POST  新建一个认证的用户,得到api_key
+<br>
+<br>
+
+##### /add  
+POST  新建一个认证的用户,得到api_key
 
 参数
 
@@ -38,7 +42,8 @@ api_key | String | 用户凭证
 <br>
 
 
-##### /update  POST  更新用户
+##### /update  
+POST  更新用户
 
 参数
 
@@ -59,7 +64,8 @@ pool | Boolean | 否 | 是否开启连接池
 <br>
 <br>
 
-##### /view  POST  查看用户
+##### /view  
+POST  查看用户
 
 参数
 
@@ -82,7 +88,8 @@ pool | Boolean | 否 | 是否开启连接池
 <br>
 <br>
 
-##### /remove POST 删除用户
+##### /remove 
+POST 删除用户
 
 参数
 
@@ -93,7 +100,8 @@ api_key | String | 是 | 用户凭证
 <br>
 <br>
 
-##### /send  POST  发送邮件 
+##### /send  
+POST  发送邮件 
 
 参数
 
