@@ -21,7 +21,9 @@ const UserSchema = new Schema({
 UserSchema.pre('save', function(next) {
     this.update_at = Date.now();
 
-    this.pass = common.cipher(this.pass);
+    if(this.pass) {
+        this.pass = common.cipher(this.pass);
+    }
 
     next();
 });

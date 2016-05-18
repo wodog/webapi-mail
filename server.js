@@ -5,7 +5,6 @@
 const fs = require("fs");
 const koa = require("koa");
 const mongoose = require("mongoose");
-const passport = require("koa-passport");
 
 /**
  * Config
@@ -18,6 +17,7 @@ const config = require("./config/config");
 mongoose.connect(config.mongo.url);
 mongoose.connection.on("error", function(err) {
     console.log(err);
+    process.exit(1);
 });
 
 /**
@@ -35,12 +35,11 @@ fs.readdirSync(modelsPath).forEach(function(file) {
  */
 const app = module.exports = koa();
 
-require("./config/passport")(passport, config);
 
-require("./config/koa")(app, config, passport);
+require("./config/koa")(app, config);
 
 // Routes
-require("./config/routes")(app, passport);
+require("./config/routes")(app);
 
 // Start app
 if (!module.parent) {

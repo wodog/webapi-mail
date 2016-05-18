@@ -1,7 +1,6 @@
 'use strict';
 
 const crypto = require('crypto');
-const ret = require('./ret');
 
 
 /**

@@ -20,7 +20,6 @@ node run start
 #### API
 
 <br>
-<br>
 
 ##### /add  
 POST  新建一个认证的用户,得到api_key
@@ -66,6 +65,7 @@ pool | Boolean | 否 | 是否开启连接池
 
 返回更新后的字段
 
+<br>
 <br>
 
 ##### /view  

@@ -3,7 +3,6 @@ const path = require("path");
 const _ = require('lodash');
 const serve = require("koa-static-cache");
 const session = require("koa-generic-session");
-const MongoStore = require("koa-sess-mongo-store");
 const responseTime = require("koa-response-time");
 const logger = require("koa-logger");
 const compress = require("koa-compress");
@@ -14,7 +13,7 @@ const hbs = require('koa-hbs');
 const STATIC_FILES_MAP = {};
 const SERVE_OPTIONS = { maxAge: 365 * 24 * 60 * 60 };
 
-module.exports = function(app, config, passport) {
+module.exports = function(app, config) {
   if (!config.app.keys) { throw new Error("Please add session secret key in the config file!"); }
   app.keys = config.app.keys;
 
@@ -33,14 +32,8 @@ module.exports = function(app, config, passport) {
     }));
   }
 
-  app.use(session({
-    key: "koareactfullexample.sid",
-    store: new MongoStore({ url: config.mongo.url }),
-  }));
 
   app.use(bodyParser());
-  app.use(passport.initialize());
-  app.use(passport.session());
 
   function hbsOptions(){
     var ret = {
