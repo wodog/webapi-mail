@@ -106,6 +106,7 @@ exports.viewUser = function*() {
             user: u.user,
             host: u.host,
             port: u.port,
+            name: u.name,
             secure: u.secure,
             pool: u.pool,
             create_at: u.create_at,
@@ -123,7 +124,7 @@ exports.viewUser = function*() {
 exports.removeUser = function*() {
     try {
         const api_key = this.request.body.api_key;
-
+        
         validate.validate_param(api_key);
 
         const re = yield User.removeByAPIKEY(api_key);

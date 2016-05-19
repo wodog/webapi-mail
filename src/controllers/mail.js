@@ -27,11 +27,9 @@ exports.sendMail = function*() {
             secure: u.secure,
             auth: {
                 user: u.user,
-                pass: common.decipher(u.pass)
+                pass: u.pass
             }
         });
-
-        console.log(`"${u.name}" <${u.user}>`);
 
         var mailOptions = {
             from: `"${u.name}" <${u.user}>`, // sender address

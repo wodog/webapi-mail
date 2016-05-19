@@ -18,22 +18,27 @@ const UserSchema = new Schema({
     update_at: { type: Date, required: true, default: Date.now }
 });
 
+UserSchema
+    .path('pass')
+    .get(function(v) {
+        return common.decipher(v);
+    })
+    .set(function(v) {
+        return common.cipher(v);
+    });
+
 UserSchema.pre('save', function(next) {
     this.update_at = Date.now();
-
-    if(this.pass) {
-        this.pass = common.cipher(this.pass);
-    }
 
     next();
 });
 
 UserSchema.statics = {
     findByAPIKEY: function(api_key) {
-    	return this.findOne({api_key});
+        return this.findOne({ api_key });
     },
     removeByAPIKEY: function(api_key) {
-    	return this.remove({api_key});
+        return this.remove({ api_key });
     }
 };
 
