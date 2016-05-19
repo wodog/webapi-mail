@@ -124,9 +124,7 @@ exports.viewUser = function*() {
 exports.removeUser = function*() {
     try {
         const api_key = this.request.body.api_key;
-        
         validate.validate_param(api_key);
-
         const re = yield User.removeByAPIKEY(api_key);
 
         validate.validate_user_remove(re);

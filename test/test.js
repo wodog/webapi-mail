@@ -12,10 +12,10 @@ describe('test for webapi-mail', function() {
                 .send({ 'user': 'qqq536505032@163.com' })
                 .send({ 'pass': 'qq536505032' })
                 .send({ 'host': 'smtp.163.com' })
-                .send({ 'port': 465 })
+                // .send({ 'port': 465 })
                 .expect(200)
                 .expect(function(res) {
-                    assert.deepEqual(res.body.code, 0);
+                    assert.deepEqual(res.body.code, 0, res.body.data);
                     assert.deepEqual(res.body.msg, 'success');
                     assert.ok(res.body.data.api_key);
                     api_key = res.body.data.api_key;
@@ -32,7 +32,7 @@ describe('test for webapi-mail', function() {
                 .send({ name: 'wodog' })
                 .expect(200)
                 .expect(function(res) {
-                    assert.deepEqual(res.body.code, 0);
+                    assert.deepEqual(res.body.code, 0, res.body.data);
                     assert.deepEqual(res.body.msg, 'success');
                     assert.deepEqual(res.body.data, {
                         user: 'qqq536505032@163.com',
@@ -54,7 +54,7 @@ describe('test for webapi-mail', function() {
                 .send({ api_key: api_key })
                 .expect(200)
                 .expect(function(res) {
-                    assert.deepEqual(res.body.code, 0);
+                    assert.deepEqual(res.body.code, 0, res.body.data);
                     assert.deepEqual(res.body.msg, 'success');
                     assert.deepEqual(res.body.data.user, 'qqq536505032@163.com');
                     assert.deepEqual(res.body.data.host, 'smtp.163.com');
@@ -74,12 +74,12 @@ describe('test for webapi-mail', function() {
     		request(app.listen())
     			.post('/send')
     			.send({api_key: api_key})
-    			.send({to: 'qqq536505032@163.com'})
+    			.send({to: ['qqq536505032@163.com', 'zhoucy@trendwood.cn']})
     			.send({subject: '测试主题'})
     			.send({html: '<p>测试内容</p>'})
     			.expect(200)
     			.expect(function(res) {
-    				assert.deepEqual(res.body.code, 0);
+    				assert.deepEqual(res.body.code, 0, res.body.data);
     				assert.deepEqual(res.body.msg, 'success');
     				assert.deepEqual(res.body.data, '邮件发送成功');
     			})
@@ -94,7 +94,7 @@ describe('test for webapi-mail', function() {
                 .send({ api_key: api_key })
                 .expect(200)
                 .expect(function(res) {
-                    assert.deepEqual(res.body.code, 0);
+                    assert.deepEqual(res.body.code, 0, res.body.data);
                     assert.deepEqual(res.body.msg, 'success');
                     assert.deepEqual(res.body.data, '删除成功');
                 })

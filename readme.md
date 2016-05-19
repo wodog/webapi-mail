@@ -19,8 +19,6 @@ node run start
 
 #### API
 
-<br>
-
 ##### /add  
 POST  新建一个认证的用户,得到api_key
 
@@ -114,7 +112,7 @@ POST  发送邮件
 字段 | 类型 | 必须 | 描述
 --- | ---- | ---- |----
 api_key | String | 是 |  用户凭证
-to | String | 是 | 接受对象
+to | String或Array | 是 | 接受对象
 subject | String | 是 | 主题
 html | String | 是 | 发送内容
 

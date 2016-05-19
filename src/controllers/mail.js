@@ -11,9 +11,13 @@ const validate = require('../util/validate');
 
 exports.sendMail = function*() {
     try {
-
         const api_key = this.request.body.api_key;
-        const to = this.request.body.to;
+        var to;
+        if (typeof to === 'string') {
+            to = this.request.body.to;
+        } else {
+            to = this.request.body.to.join();
+        }
         const subject = this.request.body.subject;
         const html = this.request.body.html;
         validate.validate_param(api_key, to, subject, html);
@@ -32,16 +36,15 @@ exports.sendMail = function*() {
         });
 
         var mailOptions = {
-            from: `"${u.name}" <${u.user}>`, // sender address
-            to: this.request.body.to, // list of receivers
-            subject: this.request.body.subject, // Subject line
-            // text: this.request.body.text, // plaintext body
-            html: this.request.body.html // html body
+            from: `"${u.name}" <${u.user}>`, 
+            to: this.request.body.to, 
+            subject: this.request.body.subject, 
+            html: this.request.body.html 
         };
 
         yield transporter.sendMail(mailOptions);
         this.body = new ret('邮件发送成功');
-        
+
     } catch (e) {
         this.body = new ret(-1, 'failure', e.message);
     }
