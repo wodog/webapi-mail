@@ -12,7 +12,7 @@ describe('test for webapi-mail', function() {
                 .send({ 'user': 'qqq536505032@163.com' })
                 .send({ 'pass': 'qq536505032' })
                 .send({ 'host': 'smtp.163.com' })
-                // .send({ 'port': 465 })
+                .send({ 'port': 465 })
                 .expect(200)
                 .expect(function(res) {
                     assert.deepEqual(res.body.code, 0, res.body.data);

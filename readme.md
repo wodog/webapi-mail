@@ -112,7 +112,7 @@ POST  发送邮件
 字段 | 类型 | 必须 | 描述
 --- | ---- | ---- |----
 api_key | String | 是 |  用户凭证
-to | String或Array | 是 | 接受对象
+to | String或Array | 是 | 接受邮件对象,String代表一个对象，Array代表多个对象
 subject | String | 是 | 主题
 html | String | 是 | 发送内容
 
