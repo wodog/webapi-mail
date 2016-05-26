@@ -213,7 +213,8 @@ update_at | Date | 更新时间
 <br>
 <br>
 
-##### POST /templates
+##### 删除模版  
+POST /templates
 
 参数:  
 
@@ -231,8 +232,6 @@ name | String | 模版名字
 content | String | 模版内容
 create_at | Date | 创建时间
 update_at | Date | 更新时间
-
-删除模版
 
 <br>
 
