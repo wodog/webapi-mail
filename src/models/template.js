@@ -29,4 +29,6 @@ TemplateSchema.statics = {
     }
 };
 
+TemplateSchema.index({api_key: 1, name: 1}, {unique: true});
+
 mongoose.model('Template', TemplateSchema);

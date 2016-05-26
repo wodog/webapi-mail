@@ -20,7 +20,7 @@ exports.sendMail = function*() {
         }
         const subject = this.request.body.subject;
         const html = this.request.body.html;
-        validate.validate_param(api_key, to, subject, html);
+        validate.validate_param_exist(api_key, to, subject, html);
 
         var u = yield User.findByAPIKEY(api_key);
         validate.validate_user_exist(u);

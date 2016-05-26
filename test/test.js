@@ -2,6 +2,7 @@ const request = require('supertest');
 const assert = require('assert');
 const app = require('../server');
 
+
 describe('test for webapi-mail', function() {
     var api_key;
 
@@ -99,6 +100,81 @@ describe('test for webapi-mail', function() {
                     assert.deepEqual(res.body.data, '删除成功');
                 })
                 .end(done);
+        });
+    });
+
+    describe('templates模块', function() {
+
+        describe('GET /templates/:name', function() {
+            it('should return code 0', function(done) {
+                const name = 'a';
+                request(app.listen())
+                    .get('/templates/a')
+                    .query({api_key, name})
+                    .expect(200)
+                    .expect(function(res) {
+                        assert.deepEqual(res.body.code, 0, res.body.data);
+                    })
+                    .end(done);
+            });
+        });
+        describe('GET /templates', function() {
+            it('should return code 0', function(done) {
+                request(app.listen())
+                    .get('/templates')
+                    .query({api_key})
+                    .expect(200)
+                    .expect(function(res) {
+                        assert.deepEqual(res.body.code, 0, res.body.data);
+                    })
+                    .end(done);
+            });
+        });
+        describe('POST /templates', function() {
+            describe('create', function() {
+                it('should return code 0', function(done) {
+                    const action = 'create';
+                    const name = 'test';
+                    const content = 'test_content';
+                    request(app.listen())
+                        .post('/templates')
+                        .send({api_key, action, name, content})
+                        .expect(200)
+                        .expect(function(res) {
+                            assert.deepEqual(res.body.code, 0, res.body.data);
+                        })
+                        .end(done);
+                });
+            });
+            describe('update', function() {
+                it('should return code 0', function(done) {
+                    const action = 'update';
+                    const name = 'test';
+                    const content = 'test_content_update';
+                    request(app.listen())
+                        .post('/templates')
+                        .send({api_key, action, name, content})
+                        .expect(200)
+                        .expect(function(res) {
+                            assert.deepEqual(res.body.code, 0, res.body.data);
+                        })
+                        .end(done);
+                });
+            });
+            describe('remove', function() {
+                it('should return code 0', function(done) {
+                    const action = 'remove';
+                    const name = 'test';
+                    request(app.listen())
+                        .post('/templates')
+                        .send({api_key, action, name})
+                        .expect(200)
+                        .expect(function(res) {
+                            assert.deepEqual(res.body.code, 0, res.body.data);
+                        })
+                        .end(done);
+                });
+            });
         });
     });
 });

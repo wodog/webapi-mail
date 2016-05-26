@@ -38,6 +38,7 @@ exports.operation = function*() {
                 name = this.request.body.name;
                 content = this.request.body.content;
                 format = this.request.body.format || 'html';
+                validate.validate_param_exist(api_key, name, content, format);
                 result = yield new Template({ api_key, name, content, format}).save();
                 this.body = new ret(result);
                 break;
@@ -46,15 +47,17 @@ exports.operation = function*() {
                 name = this.request.body.name;
                 content = this.request.body.content;
                 format = this.request.body.format;
+                validate.validate_param_exist(api_key, name);
                 let template = yield Template.findTemplate(api_key, name);
-                if(template.content) template.content = content;
-                if(template.format) template.format = format;
+                if(content) template.content = content;
+                if(format) template.format = format;
                 result = yield template.save();
                 this.body = new ret(result);
                 break;
             case 'remove':
                 api_key = this.request.body.api_key;
                 name = this.request.body.name;
+                validate.validate_param_exist(api_key, name);
                 result = yield Template.removeTemplate(api_key, name);
                 this.body = new ret(result);
                 break;
