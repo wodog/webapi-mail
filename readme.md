@@ -20,12 +20,12 @@ node run start
 
 #### API
 
+<br>
+
 ##### /add  
 POST  新建一个认证的用户,得到api_key
 
 参数
-
-<br>
 
 字段 | 类型 | 值| 描述
 --- | ---- | ----| ----
@@ -54,7 +54,7 @@ POST  更新用户
 
 字段 | 类型 | 值 | 描述
 --- | --- | --- | ---
-api_key | String | 值 | 用户凭证
+api_key | String | 必须 | 用户凭证
 user | String | 可选 | 邮箱账号
 host | String | 可选 | 邮箱服务器地址
 port | Number | 可选 | 邮箱服务器端口
@@ -122,11 +122,22 @@ html | String | 必须 | 发送内容
 <br>
 <br>
 
-##### /templates/:name GET
+##### GET /templates
 
 字段 | 类型 | 值 | 描述
 --- | ---- | --- | ---
-api_key | String | 必须 ｜ 用户凭证
+api_key | String | 必须 | 用户凭证
+ 
+获取所有的模版
+
+<br>
+<br>
+
+##### GET /templates/:name
+
+字段 | 类型 | 值 | 描述
+--- | ---- | --- | ---
+api_key | String | 必须 | 用户凭证
 name | String | 必须 | 模版名字
  
 根据模版名字查看模版
@@ -134,7 +145,7 @@ name | String | 必须 | 模版名字
 <br>
 <br>
 
-##### /templates POST
+##### POST /templates
 
 字段 | 类型 | 值 | 描述
 ---- | ---- | --- | ---
@@ -148,7 +159,7 @@ content | String | 必须 | 模版内容
 <br>
 <br>
 
-##### /templates POST
+##### POST /templates
 
 字段 | 类型 | 值 | 描述
 ---- | --- | --- | ---
@@ -162,7 +173,7 @@ content | String | 必须 | 模版内容
 <br>
 <br>
 
-##### /templates POST
+##### POST /templates
 
 字段 | 类型 | 值 | 描述
 ----| ---- | --- | ---
