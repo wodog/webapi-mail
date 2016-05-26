@@ -1,5 +1,8 @@
 'use strict';
 
+/*
+ * 检查传入参数是否存在
+ */
 exports.validate_param_exist = function() {
     for (var i = 0; i < arguments.length; i++) {
         if (!arguments[i]) {

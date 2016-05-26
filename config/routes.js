@@ -14,37 +14,20 @@ module.exports = function(app) {
     yield next;
   });
 
-  // router.get("/", indexController.index);
+  // 用户模块
+  router.get('/users/:api_key', userController.findUser);
+  router.post('/users', userController.operation);
 
-  /**
-   * 新建用户，
-   */
-  router.post('/add', userController.createUser);
-
-  /**
-   * 更新用户
-   */
-  router.post('/update', userController.updateUser);
-
-  /**
-   * 查看用户
-   */
-  router.post('/view', userController.viewUser);
-
-  /**
-   * 删除用户
-   */
-  router.post('/remove', userController.removeUser);
-
+  // 模版模块
+  router.get('/templates', templateController.findTemplates);
+  router.get('/templates/:name', templateController.findTemplate);
+  router.post('/templates', templateController.operation);
 
   /**
    * 发送邮件
    */
   router.post('/send', mailController.sendMail);
 
-  router.get('/templates', templateController.findTemplates);
-  router.get('/templates/:name', templateController.findTemplate);
-  router.post('/templates', templateController.operation);
 
 
   app.use(router.routes());
