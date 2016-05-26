@@ -1,6 +1,6 @@
 'use strict';
 
-exports.validate_param = function() {
+exports.validate_param_exist = function() {
     for (var i = 0; i < arguments.length; i++) {
         if (!arguments[i]) {
             throw new Error('参数不正确');

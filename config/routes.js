@@ -3,6 +3,7 @@
 const Router = require("koa-router");
 const userController = require('../src/controllers/user');
 const mailController = require('../src/controllers/mail');
+const templateController = require('../src/controllers/template');
 
 module.exports = function(app) {
   // register functions
@@ -41,6 +42,9 @@ module.exports = function(app) {
    */
   router.post('/send', mailController.sendMail);
 
+  router.get('/templates', templateController.findTemplates);
+  router.get('/templates/:name', templateController.findTemplate);
+  router.post('/templates', templateController.operation);
 
 
   app.use(router.routes());

@@ -19,7 +19,7 @@ exports.createUser = function*() {
         const secure = this.request.body.secure || true;
         const pool = this.request.body.pool || false;
 
-        validate.validate_param(user, pass, host, port);
+        validate.validate_param_exist(user, pass, host, port);
 
         const u = yield new User({ user, pass, host, port, name, secure, pool }).save();
         this.body = new ret({ api_key: u.api_key });
@@ -42,7 +42,7 @@ exports.updateUser = function*() {
         const secure = this.request.body.secure;
         const pool = this.request.body.pool;
 
-        validate.validate_param(api_key);
+        validate.validate_param_exist(api_key);
 
         const u = yield User.findByAPIKEY(api_key);
 
@@ -95,7 +95,7 @@ exports.viewUser = function*() {
     try {
         const api_key = this.request.body.api_key;
 
-        validate.validate_param(api_key);
+        validate.validate_param_exist(api_key);
 
         const u = yield User.findByAPIKEY(api_key);
 
@@ -123,7 +123,7 @@ exports.viewUser = function*() {
 exports.removeUser = function*() {
     try {
         const api_key = this.request.body.api_key;
-        validate.validate_param(api_key);
+        validate.validate_param_exist(api_key);
         const re = yield User.removeByAPIKEY(api_key);
 
         validate.validate_user_remove(re);
