@@ -16,6 +16,7 @@ node run start
 
 - [ ] 发送记录
 - [ ] 内容模板
+- [ ] 智能识别邮箱服务器
 
 #### API
 
@@ -24,15 +25,17 @@ POST  新建一个认证的用户,得到api_key
 
 参数
 
-字段 | 类型 | 必须| 描述
+<br>
+
+字段 | 类型 | 值| 描述
 --- | ---- | ----| ----
-user | String | 是 | 邮箱账号
-pass | String | 是 | 邮箱密码
-host | String | 是 | 邮箱服务器地址
-port | Number | 是 | 邮箱服务器端口
-name | String | 否 | 邮箱昵称
-secure | Boolean | 否 | 是否开启SSL,默认true
-pool | Boolean | 否 | 是否开启连接池,默认false
+user | String | 必须 | 邮箱账号
+pass | String | 必须 | 邮箱密码
+host | String | 必须 | 邮箱服务器地址
+port | Number | 必须 | 邮箱服务器端口
+name | String | 可选 | 邮箱昵称
+secure | Boolean | 可选 | 是否开启SSL,默认true
+pool | Boolean | 可选 | 是否开启连接池,默认false
 
 返回
 
@@ -49,15 +52,15 @@ POST  更新用户
 
 参数
 
-字段 | 类型 | 必须 | 描述
+字段 | 类型 | 值 | 描述
 --- | --- | --- | ---
-api_key | String | 是 | 用户凭证
-user | String | 否 | 邮箱账号
-host | String | 否 | 邮箱服务器地址
-port | Number | 否 | 邮箱服务器端口
-name | String | 否 | 邮箱昵称
-secure | Boolean | 否 | 是否开启SSL
-pool | Boolean | 否 | 是否开启连接池
+api_key | String | 值 | 用户凭证
+user | String | 可选 | 邮箱账号
+host | String | 可选 | 邮箱服务器地址
+port | Number | 可选 | 邮箱服务器端口
+name | String | 可选 | 邮箱昵称
+secure | Boolean | 可选 | 是否开启SSL
+pool | Boolean | 可选 | 是否开启连接池
 
 返回
 
@@ -71,9 +74,9 @@ POST  查看用户
 
 参数
 
-字段 | 类型 | 必须 | 描述
+字段 | 类型 | 值 | 描述
 --- | ---- | --- | ---
-api_key | String | 是 | 用户凭证
+api_key | String | 必须 | 用户凭证
 
 返回
 
@@ -97,9 +100,9 @@ POST 删除用户
 
 参数
 
-字段 | 类型 | 必须 | 描述
+字段 | 类型 | 值 | 描述
 --- | ---- | --- | ---
-api_key | String | 是 | 用户凭证
+api_key | String | 必须 | 用户凭证
 
 <br>
 <br>
@@ -109,14 +112,66 @@ POST  发送邮件
 
 参数
 
-字段 | 类型 | 必须 | 描述
+字段 | 类型 | 值 | 描述
 --- | ---- | ---- |----
-api_key | String | 是 |  用户凭证
-to | String或Array | 是 | 接受邮件对象,String代表一个对象，Array代表多个对象
-subject | String | 是 | 主题
-html | String | 是 | 发送内容
+api_key | String | 必须 |  用户凭证
+to | String或Array | 必须 | 接受邮件对象,String代表一个对象，Array代表多个对象
+subject | String | 必须 | 主题
+html | String | 必须 | 发送内容
 
 <br>
+<br>
+
+##### /templates/:name GET
+
+字段 | 类型 | 值 | 描述
+--- | ---- | --- | ---
+api_key | String | 必须 ｜ 用户凭证
+name | String | 必须 | 模版名字
+ 
+根据模版名字查看模版
+
+<br>
+<br>
+
+##### /templates POST
+
+字段 | 类型 | 值 | 描述
+---- | ---- | --- | ---
+action | String | create | 业务动作
+api_key | String | 必须 | 用户凭证
+name | String | 必须 | 模版名字
+content | String | 必须 | 模版内容
+
+创建模版
+
+<br>
+<br>
+
+##### /templates POST
+
+字段 | 类型 | 值 | 描述
+---- | --- | --- | ---
+action | String | update | 业务动作
+api_key | String | 必须 | 用户凭证
+name | String | 必须 | 模版名字
+content | String | 必须 | 模版内容
+
+更新模版内容
+
+<br>
+<br>
+
+##### /templates POST
+
+字段 | 类型 | 值 | 描述
+----| ---- | --- | ---
+action | String | remove | 业务动作
+api_key | String | 必须 | 用户凭证
+name | String | 必须 | 模版名字
+
+删除模版
+
 <br>
 
 #### 通用返回格式

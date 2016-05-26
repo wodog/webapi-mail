@@ -33,7 +33,6 @@ exports.createUser = function*() {
  */
 exports.updateUser = function*() {
     try {
-
         const api_key = this.request.body.api_key;
         const user = this.request.body.user;
         const pass = this.request.body.pass;
