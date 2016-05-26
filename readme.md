@@ -124,6 +124,8 @@ html | String | 必须 | 发送内容
 
 ##### GET /templates
 
+> 获取所有的模版
+
 参数:  
 
 字段 | 类型 | 值 | 描述
@@ -134,12 +136,12 @@ api_key | String | 必须 | 用户凭证
 
 模版数组
 
-获取所有的模版
-
 <br>
 <br>
 
 ##### GET /templates/:name
+
+> 根据模版名字查看模版
 
 参数:  
 
@@ -158,12 +160,12 @@ create_at | Date | 创建时间
 update_at | Date | 更新时间
 
 
-根据模版名字查看模版
-
 <br>
 <br>
 
 ##### POST /templates
+
+> 创建模版 
 
 参数:  
 
@@ -183,12 +185,12 @@ content | String | 模版内容
 create_at | Date | 创建时间
 update_at | Date | 更新时间
 
-创建模版
-
 <br>
 <br>
 
 ##### POST /templates
+
+> 更新模版内容
 
 参数:  
 
@@ -208,13 +210,12 @@ content | String | 模版内容
 create_at | Date | 创建时间
 update_at | Date | 更新时间
 
-更新模版内容
-
 <br>
 <br>
 
-##### 删除模版  
-POST /templates
+##### POST /templates
+
+> 删除模版
 
 参数:  
 
