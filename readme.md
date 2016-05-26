@@ -124,10 +124,14 @@ html | String | 必须 | 发送内容
 
 ##### GET /templates
 
+参数:  
 字段 | 类型 | 值 | 描述
 --- | ---- | --- | ---
 api_key | String | 必须 | 用户凭证
  
+返回data:  
+模版数组
+
 获取所有的模版
 
 <br>
@@ -135,11 +139,21 @@ api_key | String | 必须 | 用户凭证
 
 ##### GET /templates/:name
 
+参数:  
 字段 | 类型 | 值 | 描述
 --- | ---- | --- | ---
 api_key | String | 必须 | 用户凭证
 name | String | 必须 | 模版名字
  
+返回data:  
+字段 | 类型 | 描述
+---- | ---- | ---
+name | String | 模版名字
+content | String | 模版内容
+create_at | Date | 创建时间
+update_at | Date | 更新时间
+
+
 根据模版名字查看模版
 
 <br>
@@ -147,12 +161,21 @@ name | String | 必须 | 模版名字
 
 ##### POST /templates
 
+参数:  
 字段 | 类型 | 值 | 描述
 ---- | ---- | --- | ---
 action | String | create | 业务动作
 api_key | String | 必须 | 用户凭证
 name | String | 必须 | 模版名字
 content | String | 必须 | 模版内容
+
+返回data:  
+字段 | 类型 | 描述
+---- | ---- | ---
+name | String | 模版名字
+content | String | 模版内容
+create_at | Date | 创建时间
+update_at | Date | 更新时间
 
 创建模版
 
@@ -161,12 +184,21 @@ content | String | 必须 | 模版内容
 
 ##### POST /templates
 
+参数:  
 字段 | 类型 | 值 | 描述
 ---- | --- | --- | ---
 action | String | update | 业务动作
 api_key | String | 必须 | 用户凭证
 name | String | 必须 | 模版名字
 content | String | 必须 | 模版内容
+
+返回data:  
+字段 | 类型 | 描述
+---- | ---- | ---
+name | String | 模版名字
+content | String | 模版内容
+create_at | Date | 创建时间
+update_at | Date | 更新时间
 
 更新模版内容
 
@@ -175,11 +207,20 @@ content | String | 必须 | 模版内容
 
 ##### POST /templates
 
+参数:  
 字段 | 类型 | 值 | 描述
 ----| ---- | --- | ---
 action | String | remove | 业务动作
 api_key | String | 必须 | 用户凭证
 name | String | 必须 | 模版名字
+
+返回data:  
+字段 | 类型 | 描述
+---- | ---- | ---
+name | String | 模版名字
+content | String | 模版内容
+create_at | Date | 创建时间
+update_at | Date | 更新时间
 
 删除模版
 
