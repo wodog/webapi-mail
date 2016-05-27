@@ -1,34 +1,32 @@
 "use strict";
 
-const Router = require("koa-router");
+const router = require("koa-router")();
 const userController = require('../src/controllers/user');
 const mailController = require('../src/controllers/mail');
 const templateController = require('../src/controllers/template');
 
 module.exports = function(app) {
-  // register functions
-  var router = new Router();
+    router.use(function*(next) {
+        this.type = "json";
+        yield next;
+    });
 
-  router.use(function *(next) {
-    this.type = "json";
-    yield next;
-  });
+    // 用户模块
+    router.get('/users/:api_key', userController.findUser);
+    router.post('/users', userController.operation);
 
-  // 用户模块
-  router.get('/users/:api_key', userController.findUser);
-  router.post('/users', userController.operation);
+    // 模版模块
+    router.get('/templates', templateController.findTemplates);
+    router.get('/templates/:name', templateController.findTemplate);
+    router.post('/templates', templateController.operation);
 
-  // 模版模块
-  router.get('/templates', templateController.findTemplates);
-  router.get('/templates/:name', templateController.findTemplate);
-  router.post('/templates', templateController.operation);
+    /**
+     * 发送邮件
+     */
+    router.post('/send', mailController.sendMail);
 
-  /**
-   * 发送邮件
-   */
-  router.post('/send', mailController.sendMail);
-
-
-
-  app.use(router.routes());
+    app.use(router.routes());
+    app.use(function*() {
+        throw new Error('无此操作');
+    });
 };

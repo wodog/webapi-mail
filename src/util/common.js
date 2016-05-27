@@ -4,7 +4,7 @@ const crypto = require('crypto');
 
 
 /**
- * 加密msg
+ * cipher
  */
 exports.cipher = function(msg) {
     const cipher = crypto.createCipher('aes192', 'webapi-mail');
@@ -13,7 +13,7 @@ exports.cipher = function(msg) {
 };
 
 /**
- * 解密msg
+ * decipher
  */
 exports.decipher = function(msg) {
     const decipher = crypto.createDecipher('aes192', 'webapi-mail');
