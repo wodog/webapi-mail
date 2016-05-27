@@ -11,6 +11,11 @@ npm install
 修改config/default.config.js文件
 node run start
 ```
+#### 测试
+
+```bash
+npm run test
+```
 
 #### TODO
 

@@ -82,23 +82,7 @@ describe('test for webapi-mail', function() {
         });
 
     });
-    // describe('/send', function() {
-    //  it('should return 0 and success', function(done) {
-    //      server
-    //          .post('/send')
-    //          .send({api_key: api_key})
-    //          .send({to: [config.mail.user, 'zhoucy@trendwood.cn']})
-    //          .send({subject: '测试主题'})
-    //          .send({html: '<p>测试内容</p>'})
-    //          .expect(200)
-    //          .expect(function(res) {
-    //              assert.deepEqual(res.body.code, 0, res.body.data);
-    //              assert.deepEqual(res.body.msg, 'success');
-    //              assert.deepEqual(res.body.data, '邮件发送成功');
-    //          })
-    //          .end(done);
-    //  });
-    // });
+
 
     describe('templates模块', function() {
         describe('GET /templates/:name', function() {
@@ -141,6 +125,19 @@ describe('test for webapi-mail', function() {
                         })
                         .end(done);
                 });
+                it('should return code 0', function(done) {
+                    const action = 'create';
+                    const name = 'aa';
+                    const content = '<h1>${hello}<h1>';
+                    server
+                        .post('/templates')
+                        .send({ api_key, action, name, content })
+                        .expect(200)
+                        .expect(function(res) {
+                            assert.deepEqual(res.body.code, 0, res.body.data);
+                        })
+                        .end(done);
+                });
             });
             describe('update', function() {
                 it('should return code 0', function(done) {
@@ -164,6 +161,73 @@ describe('test for webapi-mail', function() {
                     server
                         .post('/templates')
                         .send({ api_key, action, name })
+                        .expect(200)
+                        .expect(function(res) {
+                            assert.deepEqual(res.body.code, 0, res.body.data);
+                        })
+                        .end(done);
+                });
+            });
+        });
+    });
+
+    describe('mail模块', function() {
+        describe('POST /mail', function() {
+            describe('sendWithHTML', function() {
+                it('should return 0 and success', function(done) {
+                    const action = 'sendWithHTML';
+                    const to = 'zhoucy@trendwood.cn';
+                    const subject = '测试sendWithHTML标题';
+                    const html = '<h1>测试sendWithHTML内容<h1>';
+                    server
+                        .post('/mail')
+                        .send({ action })
+                        .send({ api_key })
+                        .send({ to })
+                        .send({ subject })
+                        .send({ html })
+                        .expect(200)
+                        .expect(function(res) {
+                            assert.deepEqual(res.body.code, 0, res.body.data);
+                        })
+                        .end(done);
+                });
+            });
+            describe('sendWithHTML', function() {
+                it('should return 0 and success', function(done) {
+                    const action = 'sendWithText';
+                    const to = 'zhoucy@trendwood.cn';
+                    const subject = '测试sendWithHTML标题';
+                    const text = '<h1>测试sendWithHTML内容<h1>';
+                    server
+                        .post('/mail')
+                        .send({ action })
+                        .send({ api_key })
+                        .send({ to })
+                        .send({ subject })
+                        .send({ text })
+                        .expect(200)
+                        .expect(function(res) {
+                            assert.deepEqual(res.body.code, 0, res.body.data);
+                        })
+                        .end(done);
+                });
+            });
+            describe('sendWithTemplate', function() {
+                it('should return 0 and success', function(done) {
+                    const action = 'sendWithTemplate';
+                    const to = 'zhoucy@trendwood.cn';
+                    const subject = '测试sendWithHTML标题';
+                    const name = 'aa';
+                    const data = JSON.stringify({ hello: 'hello template' });
+                    server
+                        .post('/mail')
+                        .send({ action })
+                        .send({ api_key })
+                        .send({ to })
+                        .send({ subject })
+                        .send({ name })
+                        .send({ data })
                         .expect(200)
                         .expect(function(res) {
                             assert.deepEqual(res.body.code, 0, res.body.data);

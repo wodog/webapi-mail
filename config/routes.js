@@ -23,10 +23,10 @@ module.exports = function(app) {
     /**
      * 发送邮件
      */
-    router.post('/send', mailController.sendMail);
+    router.post('/mail', mailController.operation);
 
     app.use(router.routes());
     app.use(function*() {
-        throw new Error('无此操作');
+        throw new Error('无效的url, 请仔细检查');
     });
 };

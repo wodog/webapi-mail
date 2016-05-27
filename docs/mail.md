@@ -28,7 +28,7 @@ action | String | sendWithText | 业务动作
 api_key | String | 必须 | 用户凭证
 to | String或Array | 必须 | 接受邮件对象,String代表一个对象，Array代表多个对象
 subject | String | 必须 | 主题
-html | String | 必须 | 发送内容
+text | String | 必须 | 发送内容
 
 <br>
 
