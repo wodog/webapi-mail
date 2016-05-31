@@ -1,6 +1,6 @@
 ## 模版模块API
 
-##### GET /templates
+##### POST /templates
 
 > 获取所有的模版
 
@@ -16,7 +16,7 @@ api_key | String | 必须 | 用户凭证
 
 <br>
 
-##### GET /templates/:name
+##### POST /templates/:name
 
 > 根据模版名字查看模版
 
@@ -38,7 +38,7 @@ update_at | Date | 更新时间
 
 <br>
 
-##### POST /templates
+##### POST /templates?action=create
 
 > 创建模版 
 
@@ -46,7 +46,6 @@ update_at | Date | 更新时间
 
 字段 | 类型 | 值 | 描述
 ---- | ---- | --- | ---
-action | String | create | 业务动作
 api_key | String | 必须 | 用户凭证
 name | String | 必须 | 模版名字
 content | String | 必须 | 模版内容
@@ -63,7 +62,7 @@ update_at | Date | 更新时间
 
 <br>
 
-##### POST /templates
+##### POST /templates?create=update
 
 > 更新模版内容
 
@@ -71,7 +70,6 @@ update_at | Date | 更新时间
 
 字段 | 类型 | 值 | 描述
 ---- | --- | --- | ---
-action | String | update | 业务动作
 api_key | String | 必须 | 用户凭证
 name | String | 必须 | 模版名字
 content | String | 可选 | 模版内容
@@ -88,7 +86,7 @@ update_at | Date | 更新时间
 
 <br>
 
-##### POST /templates
+##### POST /templates?create=remove
 
 > 删除模版
 
@@ -96,7 +94,6 @@ update_at | Date | 更新时间
 
 字段 | 类型 | 值 | 描述
 ----| ---- | --- | ---
-action | String | remove | 业务动作
 api_key | String | 必须 | 用户凭证
 name | String | 必须 | 模版名字
 

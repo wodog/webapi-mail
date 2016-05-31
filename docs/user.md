@@ -1,6 +1,6 @@
 ## 用户模块API
 
-##### GET /users/:api_key
+##### POST /users/:api_key
 
 > 查看用户
 
@@ -25,7 +25,7 @@ update_at | Date | 更新时间
 
 <br>
 
-##### POST /users  
+##### POST /users?action=create
 
 > 新建一个认证的用户,得到api_key
 
@@ -33,7 +33,6 @@ update_at | Date | 更新时间
 
 字段 | 类型 | 值| 描述
 --- | ---- | ----| ----
-action | String | create | 业务动作
 user | String | 必须 | 邮箱账号
 pass | String | 必须 | 邮箱密码
 host | String | 必须 | 邮箱服务器地址
@@ -50,7 +49,7 @@ api_key | String | 用户凭证
 
 <br>
 
-##### POST /users  
+##### POST /users?action=update
 
 > 更新用户
 
@@ -59,7 +58,6 @@ api_key | String | 用户凭证
 字段 | 类型 | 值 | 描述
 --- | --- | --- | ---
 api_key | String | 必须 | 用户凭证
-action | String | update | 业务动作
 user | String | 可选 | 邮箱账号
 host | String | 可选 | 邮箱服务器地址
 port | Number | 可选 | 邮箱服务器端口
@@ -73,7 +71,7 @@ pool | Boolean | 可选 | 是否开启连接池
 
 <br>
 
-##### POST /users 
+##### POST /users?action=remove
 
 > 删除用户
 
@@ -82,4 +80,3 @@ pool | Boolean | 可选 | 是否开启连接池
 字段 | 类型 | 值 | 描述
 --- | ---- | --- | ---
 api_key | String | 必须 | 用户凭证
-action  | String | remove | 业务动作
