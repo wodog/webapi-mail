@@ -58,7 +58,7 @@ exports.operation = function*(next) {
         const subject = this.request.body.subject;
         const name = this.request.body.name;
         const data = this.request.body.data;
-        validate.validate_params_exist(api_key, to, subject, name, data);
+        validate.validate_params_exist(api_key, to, subject, name);
 
         const user = yield User.findByAPIKEY(api_key);
         validate.validate_user_exist(user);

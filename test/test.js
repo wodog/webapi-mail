@@ -200,7 +200,7 @@ describe('test for webapi-mail', function() {
                 const to = 'zhoucy@trendwood.cn';
                 const subject = '测试sendWithHTML标题';
                 const name = 'aa';
-                const data = JSON.stringify({ hello: 'hello template' });
+                const data = { hello: 'hello template' };
                 server
                     .post('/mail?action=send_with_template')
                     .send({ api_key })
