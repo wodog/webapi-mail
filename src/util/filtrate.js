@@ -1,15 +1,20 @@
 'use strict';
 
+
 const slice = Array.prototype.slice;
 const toString = Object.prototype.toString;
 
 /**
  * 过滤不需要的属性
+ * 
+ * @param  {Object|Array} 需要过滤的对象
+ * @param  {String|Array} 需要过滤的属性 
+ * @return {Object} 返回过滤后的对象
  */
 module.exports = function filtrate(obj, arr) {
 
     // 过滤属性是字符串
-    if (toString.call(arr) === '[]object String') {
+    if (toString.call(arr) === '[object String]') {
         arr = [arr];
     }
 
@@ -36,7 +41,10 @@ module.exports = function filtrate(obj, arr) {
 };
 
 /**
- * 复制对象
+ * 浅复制一个对象
+ * 
+ * @param  {Object} 需要复制的对象
+ * @return {Object} 返回一个新的对象
  */
 function duplicateObj(obj) {
     let result = {};
