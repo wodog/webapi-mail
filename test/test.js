@@ -9,14 +9,12 @@ describe('test for webapi-mail', function() {
     before(function(done) {
         server = request(app.listen());
 
-        const action = 'create';
         const user = config.mail.user;
         const pass = config.mail.pass;
         const host = config.mail.host;
         const port = config.mail.port;
         server
-            .post('/users')
-            .send({ action })
+            .post('/users?action=create')
             .send({ user })
             .send({ pass })
             .send({ host })
@@ -29,10 +27,8 @@ describe('test for webapi-mail', function() {
     });
 
     after(function(done) {
-        const action = 'remove';
         server
-            .post('/users')
-            .send({ action })
+            .post('/users?action=remove')
             .send({ api_key })
             .expect(200)
             .expect(function(res) {
@@ -42,10 +38,10 @@ describe('test for webapi-mail', function() {
     });
 
     describe('users模块', function() {
-        describe('GET /users/:api_key', function() {
-            it('should return 0 and success', function(done) {
+        describe('POST /users/:api_key', function() {
+            it('should return code 0', function(done) {
                 server
-                    .get('/users/' + api_key)
+                    .post('/users/' + api_key)
                     .expect(200)
                     .expect(function(res) {
                         assert.deepEqual(res.body.code, 0, res.body.data);
@@ -53,31 +49,27 @@ describe('test for webapi-mail', function() {
                     .end(done);
             });
         });
-        describe('POST /users', function() {
-            describe('create', function() {
-                it('should return 0 and success', function(done) {
-                    done();
-                });
+        describe('POST /users?action=create', function() {
+            it('should return code 0', function(done) {
+                done();
             });
-            describe('/update', function() {
-                it('should return 0 and success', function(done) {
-                    const action = 'update';
-                    server
-                        .post('/users')
-                        .send({ action })
-                        .send({ api_key })
-                        .send({ name: 'wodog' })
-                        .expect(200)
-                        .expect(function(res) {
-                            assert.deepEqual(res.body.code, 0, res.body.data);
-                        })
-                        .end(done);
-                });
+        });
+        describe('POST /users?action=update', function() {
+            it('should return code 0', function(done) {
+                server
+                    .post('/users?action=update')
+                    .send({ api_key })
+                    .send({ name: 'wodog' })
+                    .expect(200)
+                    .expect(function(res) {
+                        assert.deepEqual(res.body.code, 0, res.body.data);
+                    })
+                    .end(done);
             });
-            describe('remove', function() {
-                it('should return 0 and success', function(done) {
-                    done();
-                });
+        });
+        describe('POST /users?action=remove', function() {
+            it('should return code 0', function(done) {
+                done();
             });
         });
 
@@ -85,24 +77,13 @@ describe('test for webapi-mail', function() {
 
 
     describe('templates模块', function() {
-        describe('GET /templates/:name', function() {
+        describe('POST /templates/:name', function() {
             it('should return code 0', function(done) {
                 const name = 'a';
                 server
-                    .get('/templates/a')
-                    .query({ api_key, name })
-                    .expect(200)
-                    .expect(function(res) {
-                        assert.deepEqual(res.body.code, 0, res.body.data);
-                    })
-                    .end(done);
-            });
-        });
-        describe('GET /templates', function() {
-            it('should return code 0', function(done) {
-                server
-                    .get('/templates')
-                    .query({ api_key })
+                    .post('/templates/a')
+                    .query({ name })
+                    .send({ api_key })
                     .expect(200)
                     .expect(function(res) {
                         assert.deepEqual(res.body.code, 0, res.body.data);
@@ -111,129 +92,127 @@ describe('test for webapi-mail', function() {
             });
         });
         describe('POST /templates', function() {
-            describe('create', function() {
-                it('should return code 0', function(done) {
-                    const action = 'create';
-                    const name = 'test';
-                    const content = 'test_content';
-                    server
-                        .post('/templates')
-                        .send({ api_key, action, name, content })
-                        .expect(200)
-                        .expect(function(res) {
-                            assert.deepEqual(res.body.code, 0, res.body.data);
-                        })
-                        .end(done);
-                });
-                it('should return code 0', function(done) {
-                    const action = 'create';
-                    const name = 'aa';
-                    const content = '<h1>${hello}<h1>';
-                    server
-                        .post('/templates')
-                        .send({ api_key, action, name, content })
-                        .expect(200)
-                        .expect(function(res) {
-                            assert.deepEqual(res.body.code, 0, res.body.data);
-                        })
-                        .end(done);
-                });
+            it('should return code 0', function(done) {
+                server
+                    .post('/templates')
+                    .send({ api_key })
+                    .expect(200)
+                    .expect(function(res) {
+                        assert.deepEqual(res.body.code, 0, res.body.data);
+                    })
+                    .end(done);
             });
-            describe('update', function() {
-                it('should return code 0', function(done) {
-                    const action = 'update';
-                    const name = 'test';
-                    const content = 'test_content_update';
-                    server
-                        .post('/templates')
-                        .send({ api_key, action, name, content })
-                        .expect(200)
-                        .expect(function(res) {
-                            assert.deepEqual(res.body.code, 0, res.body.data);
-                        })
-                        .end(done);
-                });
+        });
+        describe('POST /templates?action=create', function() {
+            it('should return code 0', function(done) {
+                const name = 'test';
+                const content = 'test_content';
+                server
+                    .post('/templates?action=create')
+                    .send({ api_key, name, content })
+                    .expect(200)
+                    .expect(function(res) {
+                        assert.deepEqual(res.body.code, 0, res.body.data);
+                    })
+                    .end(done);
             });
-            describe('remove', function() {
-                it('should return code 0', function(done) {
-                    const action = 'remove';
-                    const name = 'test';
-                    server
-                        .post('/templates')
-                        .send({ api_key, action, name })
-                        .expect(200)
-                        .expect(function(res) {
-                            assert.deepEqual(res.body.code, 0, res.body.data);
-                        })
-                        .end(done);
-                });
+            it('should return code 0', function(done) {
+                const name = 'aa';
+                const content = '<h1>${hello}<h1>';
+                server
+                    .post('/templates?action=create')
+                    .send({ api_key, name, content })
+                    .expect(200)
+                    .expect(function(res) {
+                        assert.deepEqual(res.body.code, 0, res.body.data);
+                    })
+                    .end(done);
+            });
+        });
+        describe('POST /templates?action=update', function() {
+            it('should return code 0', function(done) {
+                const name = 'test';
+                const content = 'test_content_update';
+                server
+                    .post('/templates?action=update')
+                    .send({ api_key, name, content })
+                    .expect(200)
+                    .expect(function(res) {
+                        assert.deepEqual(res.body.code, 0, res.body.data);
+                    })
+                    .end(done);
+            });
+        });
+        describe('POST /templates?action=remove', function() {
+            it('should return code 0', function(done) {
+                const name = 'test';
+                server
+                    .post('/templates?action=remove')
+                    .send({ api_key, name })
+                    .expect(200)
+                    .expect(function(res) {
+                        assert.deepEqual(res.body.code, 0, res.body.data);
+                    })
+                    .end(done);
             });
         });
     });
 
     describe('mail模块', function() {
-        describe('POST /mail', function() {
-            describe('sendWithHTML', function() {
-                it('should return 0 and success', function(done) {
-                    const action = 'sendWithHTML';
-                    const to = 'zhoucy@trendwood.cn';
-                    const subject = '测试sendWithHTML标题';
-                    const html = '<h1>测试sendWithHTML内容<h1>';
-                    server
-                        .post('/mail')
-                        .send({ action })
-                        .send({ api_key })
-                        .send({ to })
-                        .send({ subject })
-                        .send({ html })
-                        .expect(200)
-                        .expect(function(res) {
-                            assert.deepEqual(res.body.code, 0, res.body.data);
-                        })
-                        .end(done);
-                });
+        describe('POST /mail?action=send_with_html', function() {
+            it('should return code 0', function(done) {
+                const to = 'zhoucy@trendwood.cn';
+                const subject = '测试sendWithHTML标题';
+                const html = '<h1>测试sendWithHTML内容<h1>';
+                server
+                    .post('/mail?action=send_with_html')
+                    .send({ api_key })
+                    .send({ to })
+                    .send({ subject })
+                    .send({ html })
+                    .expect(200)
+                    .expect(function(res) {
+                        assert.deepEqual(res.body.code, 0, res.body.data);
+                    })
+                    .end(done);
             });
-            describe('sendWithHTML', function() {
-                it('should return 0 and success', function(done) {
-                    const action = 'sendWithText';
-                    const to = 'zhoucy@trendwood.cn';
-                    const subject = '测试sendWithHTML标题';
-                    const text = '<h1>测试sendWithHTML内容<h1>';
-                    server
-                        .post('/mail')
-                        .send({ action })
-                        .send({ api_key })
-                        .send({ to })
-                        .send({ subject })
-                        .send({ text })
-                        .expect(200)
-                        .expect(function(res) {
-                            assert.deepEqual(res.body.code, 0, res.body.data);
-                        })
-                        .end(done);
-                });
+        });
+        describe('POST /mail?action=send_with_text', function() {
+            it('should return code 0', function(done) {
+                const to = 'zhoucy@trendwood.cn';
+                const subject = '测试sendWithHTML标题';
+                const text = '<h1>测试sendWithHTML内容<h1>';
+                server
+                    .post('/mail?action=send_with_text')
+                    .send({ api_key })
+                    .send({ to })
+                    .send({ subject })
+                    .send({ text })
+                    .expect(200)
+                    .expect(function(res) {
+                        assert.deepEqual(res.body.code, 0, res.body.data);
+                    })
+                    .end(done);
             });
-            describe('sendWithTemplate', function() {
-                it('should return 0 and success', function(done) {
-                    const action = 'sendWithTemplate';
-                    const to = 'zhoucy@trendwood.cn';
-                    const subject = '测试sendWithHTML标题';
-                    const name = 'aa';
-                    const data = JSON.stringify({ hello: 'hello template' });
-                    server
-                        .post('/mail')
-                        .send({ action })
-                        .send({ api_key })
-                        .send({ to })
-                        .send({ subject })
-                        .send({ name })
-                        .send({ data })
-                        .expect(200)
-                        .expect(function(res) {
-                            assert.deepEqual(res.body.code, 0, res.body.data);
-                        })
-                        .end(done);
-                });
+        });
+        describe('POST /mail?action=send_with_template', function() {
+            it('should return code 0', function(done) {
+                const to = 'zhoucy@trendwood.cn';
+                const subject = '测试sendWithHTML标题';
+                const name = 'aa';
+                const data = JSON.stringify({ hello: 'hello template' });
+                server
+                    .post('/mail?action=send_with_template')
+                    .send({ api_key })
+                    .send({ to })
+                    .send({ subject })
+                    .send({ name })
+                    .send({ data })
+                    .expect(200)
+                    .expect(function(res) {
+                        assert.deepEqual(res.body.code, 0, res.body.data);
+                    })
+                    .end(done);
             });
         });
     });

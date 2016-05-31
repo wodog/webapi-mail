@@ -12,12 +12,11 @@ module.exports = function(app) {
     });
 
     // 用户模块
-    router.get('/users/:api_key', userController.findUser);
+    router.post('/users/:api_key', userController.findUser);
     router.post('/users', userController.operation);
 
     // 模版模块
-    router.get('/templates', templateController.findTemplates);
-    router.get('/templates/:name', templateController.findTemplate);
+    router.post('/templates/:name', templateController.findTemplate);
     router.post('/templates', templateController.operation);
 
     /**
@@ -27,6 +26,6 @@ module.exports = function(app) {
 
     app.use(router.routes());
     app.use(function*() {
-        throw new Error('无效的url, 请仔细检查');
+        throw new Error('无效的请求, 请仔细检查url以及参数是否正确');
     });
 };

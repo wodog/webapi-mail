@@ -9,6 +9,10 @@ const validate = require('../util/validate');
 const filtrate = require('../util/filtrate');
 
 
+/**
+ * /users/:api_key
+ * 查看用户
+ */
 exports.findUser = function*() {
     const api_key = this.params.api_key;
     validate.validate_params_exist(api_key);
@@ -18,7 +22,7 @@ exports.findUser = function*() {
 
 
 exports.operation = function*(next) {
-    const action = this.request.body.action;
+    const action = this.request.query.action;
 
     // 创建用户
     if (action === 'create') {

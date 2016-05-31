@@ -8,18 +8,9 @@ const validate = require('../util/validate');
 const filtrate = require('../util/filtrate');
 
 
-exports.findTemplates = function*() {
-    const api_key = this.query.api_key;
-    validate.validate_params_exist(api_key);
-    var templates = yield Template.findTemplates(api_key);
-    templates = filtrate(templates);
-    this.body = new ret(templates);
-};
-
-
 exports.findTemplate = function*() {
-    const api_key = this.query.api_key;
     const name = this.params.name;
+    const api_key = this.request.body.api_key;
     validate.validate_params_exist(api_key, name);
     var template = yield Template.findTemplate(api_key, name);
     template = filtrate(template);
@@ -28,10 +19,20 @@ exports.findTemplate = function*() {
 
 
 exports.operation = function*(next) {
-    const action = this.request.body.action;
+    const action = this.query.action;
+    
+    // 获取所有模版
+    if(!action) {
+    	const api_key = this.request.body.api_key;
+    	validate.validate_params_exist(api_key);
+    	var templates = yield Template.findTemplates(api_key);
+    	templates = filtrate(templates);
+    	this.body = new ret(templates);
+    	return;
+    }
 
     // 创建模版
-    if (action === 'create') {
+    else if (action === 'create') {
         const api_key = this.request.body.api_key;
         const name = this.request.body.name;
         const content = this.request.body.content;

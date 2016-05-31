@@ -12,10 +12,10 @@ const replaceTemplate = require('../util/replaceTemplate');
 
 
 exports.operation = function*(next) {
-    const action = this.request.body.action;
+    const action = this.query.action;
 
     // 发送html格式邮件
-    if (action === 'sendWithHTML') {
+    if (action === 'send_with_html') {
         const api_key = this.request.body.api_key;
         let to = this.request.body.to;
         if (isArray(to)) to = to.join();
@@ -33,7 +33,7 @@ exports.operation = function*(next) {
     }
 
     // 发送text格式邮件
-    else if (action === 'sendWithText') {
+    else if (action === 'send_with_text') {
         const api_key = this.request.body.api_key;
         let to = this.request.body.to;
         if (isArray(to)) to = to.join();
@@ -51,7 +51,7 @@ exports.operation = function*(next) {
     }
 
     // 使用模版发送邮件
-    else if (action === 'sendWithTemplate') {
+    else if (action === 'send_with_template') {
         const api_key = this.request.body.api_key;
         let to = this.request.body.to;
         if (isArray(to)) to = to.join();
