@@ -9,6 +9,7 @@ const Template = mongoose.model('Template');
 const common = require('../util/common');
 const validate = require('../util/validate');
 const replaceTemplate = require('../util/replaceTemplate');
+const Mail = mongoose.model('Mail');
 
 
 exports.operation = function*(next) {
@@ -29,6 +30,9 @@ exports.operation = function*(next) {
         const from = `"${user.name}" <${user.user}>`;
         let result = yield transporter.sendMail({ from, to, subject, html });
         this.body = new ret(result);
+        
+        // 记录发送邮件日志
+        yield createMailLog(subject, to, html, user._id, result.response);
         return;
     }
 
@@ -47,6 +51,9 @@ exports.operation = function*(next) {
         const from = `"${user.name}" <${user.user}>`;
         let result = yield transporter.sendMail({ from, to, subject, text });
         this.body = new ret(result);
+
+        // 记录发送邮件日志
+        yield createMailLog(subject, to, text, user._id, result.response);
         return;
     }
 
@@ -75,11 +82,23 @@ exports.operation = function*(next) {
             result = yield transporter.sendMail({ from, to, subject, text: template });
         }
         this.body = new ret(result);
+
+        // 记录发送邮件日志
+        yield createMailLog(subject, to, template, user._id, result.response);
         return;
     }
 
     yield next;
 };
+
+
+function* createMailLog(subject, to, content, userId, result) {
+    to = to.split(',');
+    let a = new Mail({ subject, to, content, userId, result });
+    yield a.save();
+}
+
+
 
 function isArray(obj) {
     return Object.prototype.toString.call(obj) === '[object Array]';
