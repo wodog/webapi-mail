@@ -43,3 +43,9 @@ to | String或Array | 必须 | 接受邮件对象,String代表一个对象，Arr
 subject | String | 必须 | 主题
 name | String | 必须 | 模版名字
 data | String | 可选 | 替换模版内容
+
+<br>
+
+##### GET /mails?api_key=xxx
+
+> 查询发送成功的邮件记录

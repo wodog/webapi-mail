@@ -91,6 +91,14 @@ exports.operation = function*(next) {
     yield next;
 };
 
+exports.findMails = function*(next) {
+    const api_key = this.query.api_key;
+
+    const user = yield User.findOne({api_key});
+    const mails = yield Mail.find({user: user._id});
+    this.body = new ret(mails);
+};
+
 
 function* createMailLog(subject, to, content, userId, result) {
     to = to.split(',');

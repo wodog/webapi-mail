@@ -23,6 +23,7 @@ module.exports = function(app) {
      * 发送邮件
      */
     router.post('/mail', mailController.operation);
+    router.get('/mails', mailController.findMails);
 
     app.use(router.routes());
     app.use(function*() {
