@@ -7,7 +7,7 @@
   },
   "author": "trendwood",
   "dependencies": {
-    "koa": "~1.0.0",
+    "koa": "1.2.4",
     "koa-bodyparser": "~2.0.1",
     "koa-compress": "1.0.x",
     "koa-cors": "0.0.16",
